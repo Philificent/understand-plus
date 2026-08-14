@@ -1,0 +1,27 @@
+{
+  "name": "understand-plus-viewer",
+  "version": "2.9.4",
+  "description": "Standalone read-only viewer for Understand Plus knowledge graphs — no Claude Code or LLM required.",
+  "type": "module",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Philificent/understand-plus.git",
+    "directory": "understand-anything-plugin/packages/viewer"
+  },
+  "bin": {
+    "understand-anything-viewer": "bin/viewer.mjs"
+  },
+  "files": [
+    "bin",
+    "dist",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "node build.mjs",
+    "pack:release": "node build.mjs && npm pack"
+  }
+}
