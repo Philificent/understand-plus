@@ -53,6 +53,7 @@ export function applyTheme(config: ThemeConfig): void {
 
   // 4. Set data-theme for CSS-only selectors
   document.documentElement.setAttribute("data-theme", preset.isDark ? "dark" : "light");
+  document.documentElement.setAttribute("data-preset", config.presetId);
 
   // 5. Apply heading font preference
   const fontMap: Record<string, string> = {

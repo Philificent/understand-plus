@@ -595,6 +595,7 @@ function useLayerDetailTopology(): LayerDetailTopology & {
           };
       return {
         id: `agg-${i}`,
+        animated: !diffMode,
         source: agg.sourceContainerId,
         target: agg.targetContainerId,
         label: String(agg.count),
@@ -1528,7 +1529,7 @@ function GraphViewInner() {
   }
 
   return (
-    <div className="h-full w-full relative">
+    <div className="h-full w-full relative blueprint-grid">
       <Breadcrumb />
       {focusNodeId && navigationLevel === "layer-detail" && (
         <div className="absolute top-14 left-1/2 -translate-x-1/2 z-10">
@@ -1567,7 +1568,9 @@ function GraphViewInner() {
         <MiniMap
           nodeColor="var(--color-elevated)"
           maskColor="var(--glass-bg)"
-          className="!bg-surface !border !border-border-subtle"
+          className="!bg-surface !border !border-border-subtle minimap-enhanced"
+          pannable
+          zoomable
         />
         <TourFitView />
         <SelectedNodeFitView />
@@ -1581,11 +1584,12 @@ function GraphViewInner() {
             alignItems: "center",
             justifyContent: "center",
             background: "rgba(10,10,10,0.5)",
+            backdropFilter: "blur(2px)",
             pointerEvents: "none",
             zIndex: 10,
           }}
         >
-          <span style={{ color: "#d4a574", fontSize: 14 }}>
+          <span className="px-4 py-2 rounded-lg bg-elevated/90 border border-border-subtle text-accent text-sm font-medium shadow-lg">
             {tourFitPending ? "Locating tour highlight…" : "Computing layout…"}
           </span>
         </div>

@@ -145,13 +145,15 @@ function CustomNodeComponent({
 
   return (
     <div
-      className={`relative rounded-lg bg-elevated border border-border-subtle ${extraClass} min-w-[180px] max-w-[220px] overflow-hidden transition-[box-shadow,outline,opacity,filter] duration-200 cursor-pointer shadow-[0_2px_8px_rgba(0,0,0,0.3)]`}
+      className={`relative rounded-lg bg-elevated border border-border-subtle ${extraClass} min-w-[180px] max-w-[220px] overflow-hidden transition-[box-shadow,outline,opacity,filter] duration-200 cursor-pointer shadow-[0_2px_8px_rgba(0,0,0,0.3)] node-hover-glow node-animate-in`}
       onClick={() => data.onNodeClick?.(id)}
     >
-      {/* Left color bar */}
+      {/* Gradient left bar */}
       <div
         className="absolute left-0 top-0 bottom-0 w-1 rounded-l-lg"
-        style={{ backgroundColor: barColor }}
+        style={{
+          background: `linear-gradient(180deg, ${barColor}, ${barColor}88)`,
+        }}
       />
 
       <Handle

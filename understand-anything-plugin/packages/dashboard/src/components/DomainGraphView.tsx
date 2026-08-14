@@ -231,7 +231,7 @@ function DomainGraphViewInner() {
   }
 
   return (
-    <div className="h-full w-full relative">
+    <div className="h-full w-full relative blueprint-grid">
       {activeDomainId && (
         <div className="absolute top-3 left-3 z-10">
           <button
@@ -263,7 +263,9 @@ function DomainGraphViewInner() {
         <MiniMap
           nodeColor="var(--color-accent)"
           maskColor="var(--glass-bg)"
-          className="!bg-surface !border !border-border-subtle"
+          className="!bg-surface !border !border-border-subtle minimap-enhanced"
+          pannable
+          zoomable
         />
       </ReactFlow>
     </div>

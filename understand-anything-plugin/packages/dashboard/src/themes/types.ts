@@ -3,6 +3,7 @@ export type PresetId =
   | "dark-ocean"
   | "dark-forest"
   | "dark-rose"
+  | "dark-blueprint"
   | "light-minimal";
 
 export interface AccentSwatch {
@@ -31,6 +32,6 @@ export interface ThemeConfig {
 }
 
 export const DEFAULT_THEME_CONFIG: ThemeConfig = {
-  presetId: "dark-gold",
-  accentId: "gold",
+  presetId: "dark-blueprint",
+  accentId: "cyan",
 };

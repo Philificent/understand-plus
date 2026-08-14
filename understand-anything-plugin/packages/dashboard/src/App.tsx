@@ -23,6 +23,7 @@ import { useKeyboardShortcuts } from "./hooks/useKeyboardShortcuts";
 import type { KeyboardShortcut } from "./hooks/useKeyboardShortcuts";
 import { ThemeProvider } from "./themes/index.ts";
 import { ThemePicker } from "./components/ThemePicker.tsx";
+import { ScaleIn } from "./components/Animated";
 import type { ThemeConfig } from "./themes/index.ts";
 import { I18nProvider, useI18n } from "./contexts/I18nContext.tsx";
 import {
@@ -724,23 +725,25 @@ function DashboardContent({
 
       {/* Expanded code viewer modal */}
       {codeViewerOpen && codeViewerExpanded && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/65 backdrop-blur-sm p-4 sm:p-6"
-          onMouseDown={collapseCodeViewer}
-        >
+        <ScaleIn show className="fixed inset-0 z-50 flex items-center justify-center bg-black/65 backdrop-blur-sm p-4 sm:p-6">
           <div
-            className="w-[calc(100vw-32px)] max-w-[1120px] h-[calc(100vh-32px)] sm:h-[calc(100vh-48px)] max-h-[820px] rounded-lg border border-border-medium bg-surface shadow-2xl overflow-hidden"
-            onMouseDown={(event) => event.stopPropagation()}
+            className="fixed inset-0 z-50 flex items-center justify-center"
+            onMouseDown={collapseCodeViewer}
           >
-            <Suspense fallback={null}>
-              <CodeViewer
-                accessToken={accessToken}
-                presentation="modal"
-                onClose={collapseCodeViewer}
-              />
-            </Suspense>
+            <div
+              className="w-[calc(100vw-32px)] max-w-[1120px] h-[calc(100vh-32px)] sm:h-[calc(100vh-48px)] max-h-[820px] rounded-lg border border-border-medium bg-surface shadow-2xl overflow-hidden"
+              onMouseDown={(event) => event.stopPropagation()}
+            >
+              <Suspense fallback={null}>
+                <CodeViewer
+                  accessToken={accessToken}
+                  presentation="modal"
+                  onClose={collapseCodeViewer}
+                />
+              </Suspense>
+            </div>
           </div>
-        </div>
+        </ScaleIn>
       )}
 
       {/* Keyboard shortcuts help modal */}

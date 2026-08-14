@@ -159,6 +159,25 @@ body {
   }
 }
 
+@keyframes glowPulse {
+  0%, 100% { box-shadow: 0 0 8px var(--glow-accent), 0 0 2px var(--glow-accent); }
+  50% { box-shadow: 0 0 16px var(--glow-accent-strong), 0 0 4px var(--glow-accent); }
+}
+
+@keyframes edgeFlowDash {
+  to { stroke-dashoffset: -20; }
+}
+
+@keyframes nodeAppear {
+  from { opacity: 0; transform: scale(0.92); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
 @keyframes slideUp {
   from {
     transform: translateY(100%);
@@ -262,4 +281,103 @@ body {
 
 [data-theme="dark"] {
   color-scheme: dark;
+}
+
+/* ── Phase 2: Visual Enhancements ────────────────────────────────────── */
+
+/* Blueprint grid background (applied to React Flow container) */
+.blueprint-grid .react-flow__background {
+  background-color: var(--color-root) !important;
+  background-image:
+    linear-gradient(var(--color-border-subtle) 1px, transparent 1px),
+    linear-gradient(90deg, var(--color-border-subtle) 1px, transparent 1px) !important;
+  background-size: 40px 40px !important;
+}
+
+/* Node appear animation */
+.node-animate-in {
+  animation: nodeAppear 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Node hover glow — applied to CustomNode wrapper */
+.node-hover-glow {
+  transition: box-shadow 0.25s ease, transform 0.2s ease;
+}
+.node-hover-glow:hover {
+  box-shadow:
+    0 0 12px var(--glow-accent),
+    0 0 3px var(--glow-accent),
+    0 4px 16px rgba(0, 0, 0, 0.4);
+  transform: translateY(-1px);
+  z-index: 10;
+}
+
+/* Accent glow pulse animation */
+.glow-pulse {
+  animation: glowPulse 2.5s ease-in-out infinite;
+}
+
+/* Animated edge flow (dash animation) */
+.edge-animated path {
+  stroke-dasharray: 6 4;
+  animation: edgeFlowDash 0.8s linear infinite;
+}
+
+/* Shimmer loading effect */
+.shimmer-bg {
+  background: linear-gradient(
+    90deg,
+    var(--color-elevated) 25%,
+    var(--color-surface) 50%,
+    var(--color-elevated) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+}
+
+/* Enhanced minimap styling */
+.minimap-enhanced {
+  border-radius: 8px !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), 0 0 1px var(--glow-accent) !important;
+  overflow: hidden;
+}
+
+/* Slide-in animation for sidebar panels */
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.slide-in-right {
+  animation: slideInRight 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Slide-in from left for panels */
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.slide-in-left {
+  animation: slideInLeft 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Smooth scale-in for modals */
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.scale-in {
+  animation: scaleIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Blueprint theme-specific: cross-hatch pattern overlay */
+[data-preset="dark-blueprint"] .blueprint-grid .react-flow__background {
+  background-image:
+    linear-gradient(rgba(34, 211, 238, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(34, 211, 238, 0.06) 1px, transparent 1px),
+    linear-gradient(rgba(34, 211, 238, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(34, 211, 238, 0.03) 1px, transparent 1px) !important;
+  background-size: 80px 80px, 80px 80px, 16px 16px, 16px 16px !important;
 }

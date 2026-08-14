@@ -364,7 +364,7 @@ function KnowledgeGraphViewInner() {
   }
 
   return (
-    <div className="h-full w-full relative">
+    <div className="h-full w-full relative blueprint-grid">
       {layoutState.hasWarning && (
         <div
           className="absolute top-3 left-1/2 -translate-x-1/2 z-10 rounded-md border border-border-medium bg-surface/95 px-3 py-2 text-xs text-text-muted shadow-lg"
@@ -404,7 +404,9 @@ function KnowledgeGraphViewInner() {
             return colorMap[type] ?? "var(--color-accent)";
           }}
           maskColor="var(--glass-bg)"
-          className="!bg-surface !border !border-border-subtle"
+          className="!bg-surface !border !border-border-subtle minimap-enhanced"
+          pannable
+          zoomable
         />
       </ReactFlow>
     </div>
