@@ -32,6 +32,7 @@ export default function SearchBar() {
   const { t } = useI18n();
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(-1);
   const containerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -47,6 +48,7 @@ export default function SearchBar() {
     (e: React.ChangeEvent<HTMLInputElement>) => {
       setSearchQuery(e.target.value);
       setDropdownOpen(true);
+      setActiveIndex(-1);
     },
     [setSearchQuery],
   );
@@ -55,21 +57,52 @@ export default function SearchBar() {
     (nodeId: string) => {
       navigateToNodeInLayer(nodeId);
       setDropdownOpen(false);
+      setActiveIndex(-1);
     },
     [navigateToNodeInLayer],
   );
 
-  // Close dropdown on Escape
+  // Keyboard navigation: arrow keys, enter, escape
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        setDropdownOpen(false);
-        inputRef.current?.blur();
+      // Only handle if search dropdown is open
+      if (!dropdownOpen || topResults.length === 0) {
+        if (e.key === "Escape") {
+          setDropdownOpen(false);
+          inputRef.current?.blur();
+        }
+        return;
+      }
+
+      switch (e.key) {
+        case "ArrowDown":
+          e.preventDefault();
+          setActiveIndex((prev) =>
+            prev < topResults.length - 1 ? prev + 1 : 0,
+          );
+          break;
+        case "ArrowUp":
+          e.preventDefault();
+          setActiveIndex((prev) =>
+            prev > 0 ? prev - 1 : topResults.length - 1,
+          );
+          break;
+        case "Enter":
+          if (activeIndex >= 0 && activeIndex < topResults.length) {
+            e.preventDefault();
+            handleResultClick(topResults[activeIndex].nodeId);
+          }
+          break;
+        case "Escape":
+          setDropdownOpen(false);
+          setActiveIndex(-1);
+          inputRef.current?.blur();
+          break;
       }
     };
     document.addEventListener("keydown", handleKeyDown);
     return () => document.removeEventListener("keydown", handleKeyDown);
-  }, []);
+  }, [dropdownOpen, topResults, activeIndex, handleResultClick]);
 
   // Close dropdown on outside click
   useEffect(() => {
@@ -142,20 +175,32 @@ export default function SearchBar() {
 
       {/* Dropdown results */}
       {showDropdown && (
-        <div className="absolute left-4 right-4 top-full mt-0.5 glass rounded-lg shadow-xl overflow-hidden">
-          {topResults.map((result) => {
+        <div
+          className="absolute left-4 right-4 top-full mt-0.5 glass rounded-lg shadow-xl overflow-hidden"
+          role="listbox"
+          aria-label="Search results"
+        >
+          {topResults.map((result, idx) => {
             const node = nodeMap.get(result.nodeId);
             if (!node) return null;
 
             const relevance = Math.round((1 - result.score) * 100);
             const badgeColor = typeBadgeColors[node.type] ?? typeBadgeColors.file;
+            const isActive = idx === activeIndex;
 
             return (
               <button
                 key={result.nodeId}
                 type="button"
                 onClick={() => handleResultClick(result.nodeId)}
-                className="w-full flex items-center gap-3 px-3 py-2 hover:bg-elevated transition-colors text-left"
+                onMouseEnter={() => setActiveIndex(idx)}
+                className={`w-full flex items-center gap-3 px-3 py-2 transition-colors text-left ${
+                  isActive
+                    ? "bg-accent/10 text-text-primary"
+                    : "hover:bg-elevated text-text-secondary"
+                }`}
+                role="option"
+                aria-selected={isActive}
               >
                 {/* Type badge */}
                 <span

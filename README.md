@@ -101,6 +101,55 @@ Point `/understand-knowledge` at a [Karpathy-pattern LLM wiki](https://gist.gith
 
 ---
 
+## 🆕 What's New in Understand Plus
+
+Building on the original Understand Anything foundation, Understand Plus adds powerful visual and interaction enhancements:
+
+<table>
+  <tr>
+    <td width="50%" valign="top">
+      <h3>🎨 Blueprint Theme</h3>
+      <p>A refined dark blueprint theme with cyan accents, cross-hatch grid backgrounds, and animated edge flows. Six accent color options available.</p>
+    </td>
+    <td width="50%" valign="top">
+      <h3>🔥 Complexity Heatmap</h3>
+      <p>Toggle a visual overlay that colors nodes by complexity — instantly spot the hotspots in your codebase with green/yellow/red indicators.</p>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" valign="top">
+      <h3>⌨️ Keyboard-Navigable Search</h3>
+      <p>Use arrow keys to navigate search results and Enter to select. Fast, efficient exploration without touching the mouse.</p>
+    </td>
+    <td width="50%" valign="top">
+      <h3>🖱️ Right-Click Context Menu</h3>
+      <p>Right-click any node for quick actions: select, focus neighborhood, find paths, or copy the name to clipboard.</p>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" valign="top">
+      <h3>🔗 Deep-Linking & Sharing</h3>
+      <p>Every selected node updates the URL hash. Bookmark specific nodes or share links with teammates — they'll land right where you left off.</p>
+    </td>
+    <td width="50%" valign="top">
+      <h3>📝 Markdown Export</h3>
+      <p>Generate a comprehensive project report in Markdown — perfect for documentation, onboarding guides, or sharing with stakeholders.</p>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" valign="top">
+      <h3>✨ Smooth Animations</h3>
+      <p>Spring-based transitions for modals, slide-in panels, and node appearances. Framer Motion powers buttery-smooth interactions.</p>
+    </td>
+    <td width="50%" valign="top">
+      <h3>♿ Accessibility First</h3>
+      <p>ARIA labels, keyboard focus management, and screen reader support throughout. The dashboard is usable by everyone.</p>
+    </td>
+  </tr>
+</table>
+
+---
+
 ## 🚀 Quick Start
 
 ### 1. Clone and install

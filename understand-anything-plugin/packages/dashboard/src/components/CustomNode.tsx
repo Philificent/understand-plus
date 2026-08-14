@@ -1,8 +1,9 @@
-import { memo } from "react";
+import { memo, useCallback } from "react";
 import { Handle, Position } from "@xyflow/react";
 import type { NodeProps, Node } from "@xyflow/react";
 import type { NodeType } from "@understand-anything/core/types";
 import { useI18n } from "../contexts/I18nContext";
+import { useDashboardStore } from "../store";
 
 // Color maps keyed by NodeType — must be kept in sync with core NodeType union.
 const typeColors: Record<NodeType, string> = {
@@ -102,6 +103,18 @@ function CustomNodeComponent({
   const textColor = typeTextColors[knownType] ?? typeTextColors.file;
   const complexityColor = complexityColors[data.complexity] ?? complexityColors.simple;
   const { t } = useI18n();
+  const heatmapMode = useDashboardStore((s) => s.heatmapMode);
+  const openContextMenu = useDashboardStore((s) => s.openContextMenu);
+
+  // Right-click context menu
+  const handleContextMenu = useCallback(
+    (e: React.MouseEvent) => {
+      e.preventDefault();
+      e.stopPropagation();
+      openContextMenu(e.clientX, e.clientY, id, data.label);
+    },
+    [openContextMenu, id, data.label],
+  );
 
   if (import.meta.env.DEV && !(knownType in typeColors)) {
     console.warn(`[CustomNode] Unknown node type "${data.nodeType}" — using "file" colors`);
@@ -143,11 +156,36 @@ function CustomNodeComponent({
   const truncatedName =
     name.length > 24 ? name.slice(0, 22) + "..." : name;
 
+  // Heatmap overlay colors
+  const heatmapOverlayStyle: React.CSSProperties | undefined =
+    heatmapMode === "complexity"
+      ? {
+          background:
+            data.complexity === "complex"
+              ? "rgba(201, 112, 112, 0.2)"
+              : data.complexity === "moderate"
+                ? "rgba(212, 165, 116, 0.15)"
+                : "rgba(90, 158, 111, 0.1)",
+        }
+      : undefined;
+
   return (
     <div
       className={`relative rounded-lg bg-elevated border border-border-subtle ${extraClass} min-w-[180px] max-w-[220px] overflow-hidden transition-[box-shadow,outline,opacity,filter] duration-200 cursor-pointer shadow-[0_2px_8px_rgba(0,0,0,0.3)] node-hover-glow node-animate-in`}
       onClick={() => data.onNodeClick?.(id)}
+      onContextMenu={handleContextMenu}
+      role="button"
+      tabIndex={0}
+      aria-label={`${data.nodeType}: ${data.label}`}
     >
+      {/* Heatmap overlay */}
+      {heatmapOverlayStyle && (
+        <div
+          className="absolute inset-0 rounded-lg pointer-events-none transition-colors duration-300"
+          style={heatmapOverlayStyle}
+        />
+      )}
+
       {/* Gradient left bar */}
       <div
         className="absolute left-0 top-0 bottom-0 w-1 rounded-l-lg"

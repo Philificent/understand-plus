@@ -238,6 +238,15 @@ interface DashboardStore {
   layoutIssues: GraphIssue[];
   appendLayoutIssues: (issues: GraphIssue[]) => void;
   clearLayoutIssues: () => void;
+
+  // Phase 3: Complexity heatmap overlay
+  heatmapMode: "off" | "complexity" | "connections";
+  setHeatmapMode: (mode: "off" | "complexity" | "connections") => void;
+
+  // Phase 4: Context menu
+  contextMenu: { x: number; y: number; nodeId: string; nodeLabel: string } | null;
+  openContextMenu: (x: number, y: number, nodeId: string, nodeLabel: string) => void;
+  closeContextMenu: () => void;
 }
 
 function getSortedTour(graph: KnowledgeGraph): TourStep[] {
@@ -793,5 +802,15 @@ export const useDashboardStore = create<DashboardStore>()((set, get) => ({
       return { layoutIssues: [...state.layoutIssues, ...fresh] };
     }),
   clearLayoutIssues: () => set({ layoutIssues: [] }),
+
+  // Phase 3: Complexity heatmap overlay
+  heatmapMode: "off",
+  setHeatmapMode: (mode) => set({ heatmapMode: mode }),
+
+  // Phase 4: Context menu
+  contextMenu: null,
+  openContextMenu: (x, y, nodeId, nodeLabel) =>
+    set({ contextMenu: { x, y, nodeId, nodeLabel } }),
+  closeContextMenu: () => set({ contextMenu: null }),
 }));
 

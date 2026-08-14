@@ -20,10 +20,13 @@ import TokenGate from "./components/TokenGate";
 import MobileLayout from "./components/MobileLayout";
 import { useIsMobile } from "./hooks/useIsMobile";
 import { useKeyboardShortcuts } from "./hooks/useKeyboardShortcuts";
+import { useDeepLink } from "./hooks/useDeepLink";
 import type { KeyboardShortcut } from "./hooks/useKeyboardShortcuts";
 import { ThemeProvider } from "./themes/index.ts";
 import { ThemePicker } from "./components/ThemePicker.tsx";
 import { ScaleIn } from "./components/Animated";
+import { ToastProvider } from "./components/Toast";
+import NodeContextMenu from "./components/NodeContextMenu";
 import type { ThemeConfig } from "./themes/index.ts";
 import { I18nProvider, useI18n } from "./contexts/I18nContext.tsx";
 import {
@@ -261,12 +264,14 @@ function Dashboard({ accessToken }: { accessToken: string }) {
   return (
     <I18nProvider language={outputLanguage ?? "en"}>
       <ThemeProvider metaTheme={metaTheme}>
-        <DashboardContent
-          accessToken={accessToken}
-          loadError={loadError}
-          graphIssues={graphIssues}
-          graphFreshness={graphFreshness}
-        />
+        <ToastProvider>
+          <DashboardContent
+            accessToken={accessToken}
+            loadError={loadError}
+            graphIssues={graphIssues}
+            graphFreshness={graphFreshness}
+          />
+        </ToastProvider>
       </ThemeProvider>
     </I18nProvider>
   );
@@ -313,6 +318,10 @@ function DashboardContent({
   const isKnowledgeGraph = useDashboardStore((s) => s.isKnowledgeGraph);
   const domainGraph = useDashboardStore((s) => s.domainGraph);
   const layoutIssues = useDashboardStore((s) => s.layoutIssues);
+  const heatmapMode = useDashboardStore((s) => s.heatmapMode);
+  const setHeatmapMode = useDashboardStore((s) => s.setHeatmapMode);
+  const contextMenu = useDashboardStore((s) => s.contextMenu);
+  const closeContextMenu = useDashboardStore((s) => s.closeContextMenu);
   const isMobile = useIsMobile();
   const { t } = useI18n();
   const allIssues = useMemo(
@@ -441,6 +450,9 @@ function DashboardContent({
 
   // Register keyboard shortcuts
   useKeyboardShortcuts(shortcuts);
+
+  // Sync selected node with URL hash for deep-linking / sharing
+  useDeepLink();
 
   // Determine sidebar content
   // NodeInfo always takes priority when a node is selected.
@@ -630,6 +642,24 @@ function DashboardContent({
         {/* Right — fixed actions */}
         <div className="flex items-center gap-2 sm:gap-4 shrink-0">
           <FilterPanel />
+          {/* Heatmap toggle */}
+          <div className="flex items-center bg-elevated rounded-lg p-0.5">
+            <button
+              type="button"
+              onClick={() => setHeatmapMode(heatmapMode === "off" ? "complexity" : "off")}
+              title={t.toolbar?.heatmap ?? "Toggle complexity heatmap"}
+              className={`px-2 py-1 text-xs font-medium rounded-md transition-colors ${
+                heatmapMode !== "off"
+                  ? "bg-accent/20 text-accent"
+                  : "text-text-muted hover:text-text-secondary"
+              }`}
+              aria-label="Toggle complexity heatmap"
+            >
+              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.24 17 7.343 18 9.5 18 12 18 12s.5-1 1-1c.694 0 1 .5 1 1s-.5 2-1 3c-.5 1-1.343 3.343-1.343 3.343z" />
+              </svg>
+            </button>
+          </div>
           <ExportMenu />
           <button
             onClick={togglePathFinder}
@@ -768,6 +798,17 @@ function DashboardContent({
         <Suspense fallback={null}>
           <OnboardingOverlay onDismiss={dismissOnboarding} />
         </Suspense>
+      )}
+
+      {/* Context menu (right-click on nodes) */}
+      {contextMenu && (
+        <NodeContextMenu
+          x={contextMenu.x}
+          y={contextMenu.y}
+          nodeId={contextMenu.nodeId}
+          nodeLabel={contextMenu.nodeLabel}
+          onClose={closeContextMenu}
+        />
       )}
     </div>
   );
