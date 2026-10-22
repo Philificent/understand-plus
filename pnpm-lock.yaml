@@ -91,8 +91,8 @@ importers:
         specifier: ^0.25.0
         version: 0.25.0
       tree-sitter-php:
-        specifier: ^0.23.11
-        version: 0.23.12
+        specifier: ^0.24.2
+        version: 0.24.2
       tree-sitter-python:
         specifier: ^0.25.0
         version: 0.25.0
@@ -2131,6 +2131,7 @@ packages:
   eslint@9.39.4:
     resolution: {integrity: sha512-XoMjdBOwe/esVgEvLmNsD3IRHkm7fbKIUGvrleloJXUZgDHig2IPWNniv+GwjyJXzuNqVjlr5+4yVUZjycJwfQ==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+    deprecated: This version is no longer supported. Please see https://eslint.org/version-support for other options.
     hasBin: true
     peerDependencies:
       jiti: '*'
@@ -2861,6 +2862,10 @@ packages:
     resolution: {integrity: sha512-gBVjCaqDlRUk0EwoPNKzIr9KkS9041G/q31IBShPs1Xz6UTA+EXdZADbzqAJQrpDRq71CIMnOP5VMut3SL0z5Q==}
     engines: {node: ^18 || ^20 || >= 21}
 
+  node-addon-api@8.9.2:
+    resolution: {integrity: sha512-VijLXbi3UACN69I0JVXJsX4tjACjNoQDgv2gTF6sx2wWEi8tkSg2eX8p5gSIFi8z2+DL3oHmY6OyKce38SDolg==}
+    engines: {node: ^18 || ^20 || >= 21}
+
   node-fetch-native@1.6.7:
     resolution: {integrity: sha512-g9yhqoedzIUm0nTnTqAQvueMPVOuIY16bqgAJJC8XOOubYFNwz6IER9qs0Gq2Xd0+CecCKFjtdDTMA4u4xG06Q==}
 
@@ -3300,10 +3305,10 @@ packages:
       tree-sitter:
         optional: true
 
-  tree-sitter-php@0.23.12:
-    resolution: {integrity: sha512-VwkBVOahhC2NYXK/Fuqq30NxuL/6c2hmbxEF4jrB7AyR5rLc7nT27mzF3qoi+pqx9Gy2AbXnGezF7h4MeM6YRA==}
+  tree-sitter-php@0.24.2:
+    resolution: {integrity: sha512-zwgAePc/HozNaWOOfwRAA+3p8yhuehRw8Fb7vn5qd2XjiIc93uJPryDTMYTSjBRjVIUg/KY6pM3rRzs8dSwKfw==}
     peerDependencies:
-      tree-sitter: ^0.21.1
+      tree-sitter: ^0.22.4
     peerDependenciesMeta:
       tree-sitter:
         optional: true
@@ -6441,6 +6446,8 @@ snapshots:
 
   node-addon-api@8.6.0: {}
 
+  node-addon-api@8.9.2: {}
+
   node-fetch-native@1.6.7: {}
 
   node-gyp-build@4.8.4: {}
@@ -6935,7 +6942,7 @@ snapshots:
 
   tree-sitter-c@0.23.6:
     dependencies:
-      node-addon-api: 8.6.0
+      node-addon-api: 8.9.2
       node-gyp-build: 4.8.4
 
   tree-sitter-cpp@0.23.4:
@@ -6956,7 +6963,7 @@ snapshots:
 
   tree-sitter-javascript@0.23.1:
     dependencies:
-      node-addon-api: 8.6.0
+      node-addon-api: 8.9.2
       node-gyp-build: 4.8.4
 
   tree-sitter-javascript@0.25.0:
@@ -6964,9 +6971,9 @@ snapshots:
       node-addon-api: 8.6.0
       node-gyp-build: 4.8.4
 
-  tree-sitter-php@0.23.12:
+  tree-sitter-php@0.24.2:
     dependencies:
-      node-addon-api: 8.6.0
+      node-addon-api: 8.9.2
       node-gyp-build: 4.8.4
 
   tree-sitter-python@0.25.0:
