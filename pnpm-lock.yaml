@@ -155,8 +155,8 @@ importers:
         specifier: ^12.0.0
         version: 12.43.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       graphology:
-        specifier: ^0.25.4
-        version: 0.25.4(graphology-types@0.24.8)
+        specifier: ^0.26.0
+        version: 0.26.0(graphology-types@0.24.8)
       graphology-communities-louvain:
         specifier: ^2.0.1
         version: 2.0.2(graphology-types@0.24.8)
@@ -2131,6 +2131,7 @@ packages:
   eslint@9.39.4:
     resolution: {integrity: sha512-XoMjdBOwe/esVgEvLmNsD3IRHkm7fbKIUGvrleloJXUZgDHig2IPWNniv+GwjyJXzuNqVjlr5+4yVUZjycJwfQ==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+    deprecated: This version is no longer supported. Please see https://eslint.org/version-support for other options.
     hasBin: true
     peerDependencies:
       jiti: '*'
@@ -2312,11 +2313,6 @@ packages:
     resolution: {integrity: sha512-ckHg8MXrXJkOARk56ZaSCM1g1Wihe2d6iTmz1enGOz4W/l831MBCKSayeFQfowgF8wd+PQ4rlch/56Vs/VZLDQ==}
     peerDependencies:
       graphology-types: '>=0.23.0'
-
-  graphology@0.25.4:
-    resolution: {integrity: sha512-33g0Ol9nkWdD6ulw687viS8YJQBxqG5LWII6FI6nul0pq6iM2t5EKquOTFDbyTblRB3O9I+7KX4xI8u5ffekAQ==}
-    peerDependencies:
-      graphology-types: '>=0.24.0'
 
   graphology@0.26.0:
     resolution: {integrity: sha512-8SSImzgUUYC89Z042s+0r/vMibY7GX/Emz4LDO5e7jYXhuoWfHISPFJYjpRLUSJGq6UQ6xlenvX1p/hJdfXuXg==}
@@ -5705,12 +5701,6 @@ snapshots:
   graphology-utils@2.5.2(graphology-types@0.24.8):
     dependencies:
       graphology-types: 0.24.8
-
-  graphology@0.25.4(graphology-types@0.24.8):
-    dependencies:
-      events: 3.3.0
-      graphology-types: 0.24.8
-      obliterator: 2.0.5
 
   graphology@0.26.0(graphology-types@0.24.8):
     dependencies:
