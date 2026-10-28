@@ -230,6 +230,16 @@ export const ru = {
     asPNG: "Экспортировать как PNG",
     asSVG: "Экспортировать как SVG",
     asJSON: "Экспортировать как JSON",
+    asMarkdown: "Export as Markdown",
+  },
+  toolbar: {
+    heatmap: "Toggle complexity heatmap",
+  },
+  contextMenu: {
+    select: "Select node",
+    focus: "Show neighborhood",
+    pathFind: "Find paths from here",
+    copyName: "Copy name",
   },
   edgeLabels: {
     imports: { forward: "импортирует", backward: "импортируется" },

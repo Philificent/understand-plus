@@ -230,6 +230,16 @@ export const ja = {
     asPNG: "PNGでエクスポート",
     asSVG: "SVGでエクスポート",
     asJSON: "JSONでエクスポート",
+    asMarkdown: "Export as Markdown",
+  },
+  toolbar: {
+    heatmap: "Toggle complexity heatmap",
+  },
+  contextMenu: {
+    select: "Select node",
+    focus: "Show neighborhood",
+    pathFind: "Find paths from here",
+    copyName: "Copy name",
   },
   edgeLabels: {
     imports: { forward: "インポート", backward: "インポートされる" },

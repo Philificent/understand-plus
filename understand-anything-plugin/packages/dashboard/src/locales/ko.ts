@@ -230,6 +230,16 @@ export const ko = {
     asPNG: "PNG로 내보내기",
     asSVG: "SVG로 내보내기",
     asJSON: "JSON으로 내보내기",
+    asMarkdown: "Export as Markdown",
+  },
+  toolbar: {
+    heatmap: "Toggle complexity heatmap",
+  },
+  contextMenu: {
+    select: "Select node",
+    focus: "Show neighborhood",
+    pathFind: "Find paths from here",
+    copyName: "Copy name",
   },
 edgeLabels: {
     imports: { forward: "임포트", backward: "임포트됨" },
