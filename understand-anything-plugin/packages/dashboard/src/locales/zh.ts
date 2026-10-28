@@ -230,6 +230,16 @@ export const zh = {
     asPNG: "导出为 PNG",
     asSVG: "导出为 SVG",
     asJSON: "导出为 JSON",
+    asMarkdown: "Export as Markdown",
+  },
+  toolbar: {
+    heatmap: "Toggle complexity heatmap",
+  },
+  contextMenu: {
+    select: "Select node",
+    focus: "Show neighborhood",
+    pathFind: "Find paths from here",
+    copyName: "Copy name",
   },
   edgeLabels: {
     imports: { forward: "导入", backward: "被导入" },

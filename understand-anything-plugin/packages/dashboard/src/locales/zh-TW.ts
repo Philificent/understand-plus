@@ -230,6 +230,16 @@ export const zhTW = {
     asPNG: "匯出為 PNG",
     asSVG: "匯出為 SVG",
     asJSON: "匯出為 JSON",
+    asMarkdown: "Export as Markdown",
+  },
+  toolbar: {
+    heatmap: "Toggle complexity heatmap",
+  },
+  contextMenu: {
+    select: "Select node",
+    focus: "Show neighborhood",
+    pathFind: "Find paths from here",
+    copyName: "Copy name",
   },
   edgeLabels: {
     imports: { forward: "導入", backward: "被導入" },

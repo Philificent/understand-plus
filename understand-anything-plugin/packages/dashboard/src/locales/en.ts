@@ -230,6 +230,16 @@ export const en = {
     asPNG: "Export as PNG",
     asSVG: "Export as SVG",
     asJSON: "Export as JSON",
+    asMarkdown: "Export as Markdown",
+  },
+  toolbar: {
+    heatmap: "Toggle complexity heatmap",
+  },
+  contextMenu: {
+    select: "Select node",
+    focus: "Show neighborhood",
+    pathFind: "Find paths from here",
+    copyName: "Copy name",
   },
   edgeLabels: {
     imports: { forward: "imports", backward: "imported by" },
