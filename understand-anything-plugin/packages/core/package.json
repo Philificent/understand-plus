@@ -44,8 +44,8 @@
     "@tree-sitter-grammars/tree-sitter-kotlin": "1.1.0",
     "@understand-anything/tree-sitter-dart-wasm": "workspace:*",
     "@understand-anything/tree-sitter-swift-wasm": "workspace:*",
-    "fuse.js": "^7.1.0",
-    "ignore": "^7.0.12",
+    "fuse.js": "^7.5.0",
+    "ignore": "^7.0.14",
     "tree-sitter-c-sharp": "^0.23.1",
     "tree-sitter-cpp": "^0.23.4",
     "tree-sitter-go": "^0.25.0",
@@ -57,8 +57,8 @@
     "tree-sitter-rust": "^0.24.0",
     "tree-sitter-scala": "^0.24.0",
     "tree-sitter-typescript": "^0.23.2",
-    "web-tree-sitter": "^0.26.6",
-    "yaml": "^2.8.3",
-    "zod": "^4.3.6"
+    "web-tree-sitter": "^0.27.1",
+    "yaml": "^2.9.1",
+    "zod": "^4.6.7"
   }
 }
